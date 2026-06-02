@@ -1,5 +1,5 @@
 import { Seleccion } from "@/interface/Seleccion";
-import { mapSelecciones } from "@/mappers";
+import { mapSeleccion, mapSelecciones } from "@/mappers";
 import api from "./api";
 
 interface Response {
@@ -22,5 +22,22 @@ export const getSelecciones = async (): Promise<boolean | Response> => {
   } catch (error) {
     console.error(error);
     return false;
+  }
+};
+
+export const getSeleccionById = async (
+  id: string,
+): Promise<Seleccion | null> => {
+  try {
+    const { data } = await api.get(`teams/${id}`);
+
+    if (data) {
+      return mapSeleccion(data);
+    }
+
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };

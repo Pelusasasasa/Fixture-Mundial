@@ -16,3 +16,11 @@ export const mapSelecciones = (selecciones: SeleccionApi[]): Seleccion[] => {
     flag: seleccion.crest,
   }));
 };
+
+export const mapSeleccion = (seleccion: SeleccionApi): Seleccion => {
+  return {
+    id: seleccion.id,
+    nombre: seleccion.name,
+    flag: seleccion.crest,
+  };
+};
