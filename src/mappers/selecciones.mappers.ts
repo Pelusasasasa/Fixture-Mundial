@@ -5,6 +5,7 @@ interface SeleccionApi {
   id: string;
   name: string;
   crest: string;
+  group: string;
 
   squad?: JugadoresApi[];
 }
@@ -23,4 +24,19 @@ export const mapSeleccion = (seleccion: SeleccionApi): Seleccion => {
     nombre: seleccion.name,
     flag: seleccion.crest,
   };
+};
+
+export const mapSeleccionesPorGrupos = (selecciones: Seleccion[]) => {
+  const grupos: Seleccion[][] = [];
+  let grupoActual: Seleccion[] = [];
+
+  selecciones.forEach((seleccion) => {
+    grupoActual.push(seleccion);
+    if (grupoActual.length === 4) {
+      grupos.push(grupoActual);
+      grupoActual = [];
+    }
+  });
+
+  return grupos;
 };
