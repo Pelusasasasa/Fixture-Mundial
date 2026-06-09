@@ -9,7 +9,8 @@ interface Props {
 }
 
 export const PartidoCard = ({ partido }: Props) => {
-  console.log(partido);
+  console.log("p", partido);
+
   return (
     <View style={styles.container}>
       {/* Encabezado */}
