@@ -1,7 +1,7 @@
 import { mapPartidos } from "@/mappers/partidos.mappers";
 import api from "./api";
 
-export const traerPartidosDeSeleccion = async (id: string) => {
+export const traerPartidosDeSeleccion = async (id: number) => {
   try {
     const { data } = await api.get(`/teams/${id}/matches`, {
       params: {

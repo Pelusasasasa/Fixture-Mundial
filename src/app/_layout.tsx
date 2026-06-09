@@ -1,5 +1,6 @@
+import CustomDrawer from "@/components/ui/CustomDrawer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Stack } from "expo-router";
+import Drawer from "expo-router/drawer";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "react-native";
 
@@ -22,10 +23,11 @@ export default function RootLayout() {
     <SafeAreaView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
         <StatusBar style={isDark ? "light" : "dark"} />
-        <Stack
+        <Drawer
+          drawerContent={(props) => <CustomDrawer {...props} />}
           screenOptions={{
             headerShown: false,
-            contentStyle: {
+            drawerStyle: {
               backgroundColor: isDark ? "#111827" : "#ffffff",
             },
           }}

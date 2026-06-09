@@ -4,8 +4,10 @@ import Colors from "@/constants/colors";
 import { usePartidoSeleccion, useSeleccionById } from "@/hooks";
 
 import obtenerElProximoPartido from "@/utils/obtenerElProximoPartido";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Image } from "expo-image";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   ImageBackground,
@@ -15,9 +17,21 @@ import {
 } from "react-native";
 
 const MyTeamScreen = () => {
-  const { data, isLoading } = useSeleccionById("840");
-  const { data: partidos } = usePartidoSeleccion(data?.id || "");
+  const [equipo, setEquipo] = useState("840");
+  const { data, isLoading } = useSeleccionById(equipo || "");
+  const { data: partidos } = usePartidoSeleccion(data?.id || 0);
   const proximoPartido = obtenerElProximoPartido(partidos);
+
+  useEffect(() => {
+    const obtenerEquipo = async () => {
+      const equipoGuardado = await AsyncStorage.getItem("miEquipo");
+      if (equipoGuardado) {
+        setEquipo(equipoGuardado);
+      }
+    };
+
+    obtenerEquipo();
+  }, []);
 
   if (!data) return;
 

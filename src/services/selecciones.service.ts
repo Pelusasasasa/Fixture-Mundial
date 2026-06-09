@@ -7,7 +7,7 @@ interface Response {
   total: number;
 }
 
-export const getSelecciones = async (): Promise<boolean | Response> => {
+export const getSelecciones = async (): Promise<Response> => {
   try {
     const { data } = await api.get(`competitions/2000/teams`);
 
@@ -18,10 +18,10 @@ export const getSelecciones = async (): Promise<boolean | Response> => {
       };
     }
 
-    return true;
+    throw new Error("Error al obtener las selecciones");
   } catch (error) {
     console.error(error);
-    return false;
+    return { teams: [], total: 0 };
   }
 };
 
