@@ -1,7 +1,23 @@
-# Ejecutar build para probar en tablet android
+# Explicacion del proyecto
 
-1. `npx expo prebuild`
-2. Ejecutar `npx expo run:android`
+En este proyecto utilizamos una api externa gratuita para poder obtener los datos necesarios de cada una de las pantallas, por eso me veo limitado a que datos mostrar
+
+Vamos a contar con 3 pantallas principales, ### Los partidos
+Muestra todos los partidos de cada fecha del mundial, se puede filtrar por fecha
+
+    ### Los Grupos
+    Ordenadmos por Abecedario encontramos os grupos con sus selecciones en donde si tocamos una seleccion nos muestra que jugadores integran la seleccion
+
+    ### My Equipo
+    Pantalla que nos muestra que equipo favorito elegimos con informacion de su proximo partido y lambien los cards de los partidos
+
+# Como Usar la app
+
+    Puedes navegar por la app libremente entre las pantallas sin problemas e ir viendo la informacion basica
+
+    En el Drawer lo que podemos hacer es cambiar el equipo favorito que elejimos y tambien vamos a ver menu de otras competencias que actualmente no funcionan, solo son a modo informativo.
+
+# Comandos para Desarrollador
 
 # Verificar que no hay errores
 
@@ -12,14 +28,6 @@
 
 1. ejecutar `eas build:configure`
 2. ejecutar `eas build --platform android --profile preview`
-
-# Subir a produccion a IOS
-
-1. ejecutar `eas build --platform ios --profile production`
-2. ejecutar `eas submit -p ios --profile production`
-3. Seleccionar `Select a build from EAS`
-4. Elejimos cual subir (Por lo general el ultimo).
-5. Generar el apy key automaticamente
 
 # Subir Actualizacion
 
