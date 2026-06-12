@@ -1,12 +1,15 @@
 import GrupoCard from "@/components/grupos/GrupoCard";
+import Loading from "@/components/ui/Loading";
 import Colors from "@/constants/colors";
 import { useGrupos } from "@/hooks/grupos/useGrupos";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
 
 const GruposScreen = () => {
-  const { data, isLoading } = useGrupos();
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, isLoading, refetch } = useGrupos();
 
-  if (isLoading) return null;
+  if (isLoading) return <Loading message="Cargando grupos..." />;
 
   return (
     <View style={styles.container}>
@@ -15,8 +18,12 @@ const GruposScreen = () => {
 
       <FlatList
         data={data}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={refetch} />
+        }
         renderItem={({ item }) => <GrupoCard grupo={item} />}
         keyExtractor={(item) => item.group}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
       />
     </View>
   );

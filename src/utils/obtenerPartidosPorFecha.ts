@@ -19,6 +19,6 @@ export const obtenerPartidosPorFecha = (partidos: any[]) => {
 
     return agrupados;
   } catch (error) {
-    console.log(error);
+    console.error("error al agrupar los partidos", error);
   }
 };

@@ -11,6 +11,6 @@ export const traerPartidosDeSeleccion = async (id: number) => {
 
     return mapPartidos(data.matches);
   } catch (error) {
-    console.log(error);
+    console.error("error al traer los partidos de la seleccion", error);
   }
 };

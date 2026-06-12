@@ -31,6 +31,8 @@ export const getSeleccionById = async (
   try {
     const { data } = await api.get(`teams/${id}`);
 
+    console.log(data);
+
     if (data) {
       return mapSeleccion(data);
     }

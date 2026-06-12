@@ -6,6 +6,6 @@ export const getCompeticion = async () => {
 
     return data.matches;
   } catch (error: any) {
-    console.log(error?.response.data);
+    console.error("error al traer la competicion", error?.response.data);
   }
 };

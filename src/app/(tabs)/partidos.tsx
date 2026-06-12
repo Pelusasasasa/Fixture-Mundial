@@ -1,5 +1,6 @@
 import FechaComponent from "@/components/partidos/FechaComponent";
 import PartidoCard from "@/components/partidos/PartidoCard";
+import Loading from "@/components/ui/Loading";
 
 import Colors from "@/constants/colors";
 import { useGetcompeticion } from "@/hooks/competicion/useCompeticion";
@@ -21,6 +22,8 @@ const PartidosScreen = () => {
     );
     return grupo ? (grupo.partidos as any[]) : [];
   }, [partidosFiltrados, fechaSeleccionada]);
+
+  if (isLoading) return <Loading message="Cargando partidos..." />;
 
   return (
     <View style={styles.container}>

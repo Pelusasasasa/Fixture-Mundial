@@ -12,6 +12,11 @@ const TabsLayout = () => {
         },
         headerTintColor: "#fff",
         headerLeft: () => <MenuButton />,
+        tabBarStyle: {
+          backgroundColor: "#001133",
+        },
+        tabBarActiveTintColor: "#007AFF",
+        tabBarInactiveTintColor: "#FFFFFF",
         headerTitle: () => (
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
             <IonIcons name="football-outline" size={26} color="#00ff88" />
@@ -28,8 +33,12 @@ const TabsLayout = () => {
         name="partidos"
         options={{
           title: "Partidos",
-          tabBarIcon: ({ color, size }) => (
-            <IonIcons name="football" color={color} size={size} />
+          tabBarIcon: ({ focused, size }) => (
+            <IonIcons
+              name="football"
+              color={focused ? "#007Aff" : "#FFFFFF"}
+              size={size}
+            />
           ),
         }}
       />
@@ -37,8 +46,12 @@ const TabsLayout = () => {
         name="grupos"
         options={{
           title: "Grupos",
-          tabBarIcon: ({ color, size }) => (
-            <IonIcons name="list-outline" color={color} size={size} />
+          tabBarIcon: ({ focused, size }) => (
+            <IonIcons
+              name="list-outline"
+              color={focused ? "#007Aff" : "#FFFFFF"}
+              size={size}
+            />
           ),
         }}
       />
@@ -46,8 +59,12 @@ const TabsLayout = () => {
         name="myteam"
         options={{
           title: "MiEquipo",
-          tabBarIcon: ({ color, size }) => (
-            <IonIcons name="headset-outline" color={color} size={size} />
+          tabBarIcon: ({ focused, size }) => (
+            <IonIcons
+              name="headset-outline"
+              color={focused ? "#007Aff" : "#FFFFFF"}
+              size={size}
+            />
           ),
         }}
       />

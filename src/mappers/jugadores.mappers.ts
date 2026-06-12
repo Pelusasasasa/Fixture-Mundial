@@ -1,6 +1,7 @@
 export interface JugadoresApi {
-  id: string;
+  id: number;
   name: string;
   position: string;
   nationality: string;
+  dateOfBirth: string;
 }

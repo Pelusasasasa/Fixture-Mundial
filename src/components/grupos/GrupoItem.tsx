@@ -1,7 +1,8 @@
 import Colors from "@/constants/colors";
 import { Table } from "@/interface/Grupo";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 interface Props {
   table: Table;
@@ -9,11 +10,27 @@ interface Props {
 }
 
 export default function GrupoItem({ table, index }: Props) {
+  const router = useRouter();
+
   const played = table.won + table.draw + table.lost;
   const isQualifying = index < 2;
 
+  const handlePress = () => {
+    router.push({
+      pathname: "/equipo/[id]",
+      params: { id: table.team.id, name: table.team.name },
+    });
+  };
+
   return (
-    <View style={[styles.row, isQualifying && styles.rowQualifying]}>
+    <Pressable
+      onPress={handlePress}
+      style={({ pressed }) => [
+        styles.row,
+        isQualifying && styles.rowQualifying,
+        pressed && { backgroundColor: "rgba(125, 125, 125, 0.2)" },
+      ]}
+    >
       {/* Celda del equipo */}
       <View style={styles.teamCell}>
         <Text style={styles.positionText}>{index + 1}</Text>
@@ -34,7 +51,7 @@ export default function GrupoItem({ table, index }: Props) {
       <Text style={styles.statCell}>{table.draw}</Text>
       <Text style={styles.statCell}>{table.lost}</Text>
       <Text style={[styles.statCell, styles.pointsCell]}>{table.points}</Text>
-    </View>
+    </Pressable>
   );
 }
 

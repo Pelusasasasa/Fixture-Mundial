@@ -2,7 +2,7 @@ import { Seleccion } from "@/interface/Seleccion";
 import { JugadoresApi } from "./jugadores.mappers";
 
 interface SeleccionApi {
-  id: string;
+  id: number;
   name: string;
   crest: string;
   group: string;
@@ -15,6 +15,7 @@ export const mapSelecciones = (selecciones: SeleccionApi[]): Seleccion[] => {
     id: seleccion.id,
     nombre: seleccion.name,
     flag: seleccion.crest,
+    jugadores: [],
   }));
 };
 
@@ -23,6 +24,7 @@ export const mapSeleccion = (seleccion: SeleccionApi): Seleccion => {
     id: seleccion.id,
     nombre: seleccion.name,
     flag: seleccion.crest,
+    jugadores: seleccion.squad ?? [],
   };
 };
 

@@ -1,7 +1,9 @@
 import { PartidoCard } from "@/components/partido/PartidoCard";
 import CardStat from "@/components/ui/CardStat";
+import Loading from "@/components/ui/Loading";
 import Colors from "@/constants/colors";
 import { usePartidoSeleccion, useSeleccionById } from "@/hooks";
+import { calcularTiempo } from "@/utils/calcularTiempo";
 
 import obtenerElProximoPartido from "@/utils/obtenerElProximoPartido";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -9,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 import {
+  DeviceEventEmitter,
   FlatList,
   ImageBackground,
   StyleSheet,
@@ -19,10 +22,21 @@ import {
 const MyTeamScreen = () => {
   const [equipo, setEquipo] = useState("840");
   const { data, isLoading } = useSeleccionById(equipo || "");
-  const { data: partidos } = usePartidoSeleccion(data?.id || 0);
+  const [tiempoRestante, setTiempoRestante] = useState<string>("00:00:00");
+
+  const { data: partidos, isLoading: isLoadingPartidos } = usePartidoSeleccion(
+    data?.id || 0,
+  );
   const proximoPartido = obtenerElProximoPartido(partidos);
 
   useEffect(() => {
+    const subscripccion = DeviceEventEmitter.addListener(
+      "equipoFavoritoCambiado",
+      (equipo) => {
+        setEquipo(equipo);
+      },
+    );
+
     const obtenerEquipo = async () => {
       const equipoGuardado = await AsyncStorage.getItem("miEquipo");
       if (equipoGuardado) {
@@ -31,9 +45,24 @@ const MyTeamScreen = () => {
     };
 
     obtenerEquipo();
+
+    return () => subscripccion.remove();
   }, []);
 
-  if (!data) return;
+  useEffect(() => {
+    if (!proximoPartido) return;
+
+    setTiempoRestante(calcularTiempo(proximoPartido.fecha));
+    const intervalo = setInterval(() => {
+      setTiempoRestante(calcularTiempo(proximoPartido.fecha));
+    }, 60000);
+
+    return () => clearInterval(intervalo);
+  }, [proximoPartido]);
+
+  if (isLoading) {
+    <Loading message="Cargando datos..." />;
+  }
 
   return (
     <View style={styles.container}>
@@ -65,7 +94,7 @@ const MyTeamScreen = () => {
                 marginTop: 4,
               }}
             >
-              {data.nombre}
+              {data?.nombre}
             </Text>
           </View>
         </View>
@@ -87,14 +116,14 @@ const MyTeamScreen = () => {
               }}
             >
               VS{" "}
-              {proximoPartido?.equipoLocal.name === data.nombre
+              {proximoPartido?.equipoLocal.name === data?.nombre
                 ? proximoPartido?.equipoVisitante.name
                 : proximoPartido?.equipoLocal.name}
             </Text>
           </View>
 
           <View>
-            <Text style={styles.hora}>06:04:17</Text>
+            <Text style={styles.hora}>{tiempoRestante}</Text>
             <Text style={{ color: "#d1d5db", marginVertical: 5 }}>
               Dias:Hrs:Mins
             </Text>

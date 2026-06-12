@@ -3,16 +3,17 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import {
-    DrawerContentComponentProps,
-    DrawerContentScrollView,
+  DrawerContentComponentProps,
+  DrawerContentScrollView,
 } from "expo-router/build/react-navigation/drawer";
 import { useEffect, useState } from "react";
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    useColorScheme,
-    View,
+  DeviceEventEmitter,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
 } from "react-native";
 import SelectModal from "./SelectModal";
 
@@ -31,6 +32,7 @@ export default function CustomDrawer(props: DrawerContentComponentProps) {
     const guardarEquipo = async () => {
       if (!equipo) return;
       await AsyncStorage.setItem("miEquipo", equipo.toString());
+      DeviceEventEmitter.emit("equipoFavoritoCambiado", equipo.toString());
     };
 
     guardarEquipo();
