@@ -1,3 +1,7 @@
+# Repositorio del proyecto
+
+https://github.com/Pelusasasasa/Fixture-Mundial
+
 # Explicacion del proyecto
 
 En este proyecto utilizamos una api externa gratuita para poder obtener los datos necesarios de cada una de las pantallas, por eso me veo limitado a que datos mostrar

@@ -10,17 +10,17 @@
     "ios": {
       "supportsTablet": false,
       "icon": {
-        "light": "./assets/icons/ios-light.png",
-        "dark": "./assets/icons/ios-dark.png",
-        "tinted": "./assets/icons/ios-tinted.png"
+        "light": "./assets/images/icon.png",
+        "dark": "./assets/images/icon.png",
+        "tinted": "./assets/images/icon.png"
       }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "backgroundImage": "./assets/icons/adaptive-icon.png",
-        "monochromeImage": "./assets/icons/adaptive-icon.png"
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundImage": "./assets/images/icon.png",
+        "monochromeImage": "./assets/images/icon.png"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.pelusaaal.fixturefutbol"
@@ -36,7 +36,7 @@
         {
           "backgroundColor": "#208AEF",
           "android": {
-            "image": "./assets/icons/splash-icon.png",
+            "image": "./assets/images/icon.png",
             "imageWidth": 76
           }
         }
@@ -46,6 +46,18 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "3a3bde5b-803a-411e-a25f-be0065ff6d64"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3a3bde5b-803a-411e-a25f-be0065ff6d64"
     }
   }
 }
